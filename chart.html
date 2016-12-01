@@ -1,0 +1,63 @@
+
+<html>
+<head>
+   
+<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#orgChart{
+    width: auto;
+    height: auto;
+}
+
+#orgChartContainer{
+    width: 1000px;
+    height: 500px;
+    overflow: auto;   
+}
+
+    </style>
+</head>
+
+    <div id="orgChartContainer">
+      <div id="orgChart"></div>
+    </div>
+    <div id="consoleOutput">
+    </div>
+
+	<script src="jquery-3.min.js"></script>
+    <script type="text/javascript" src="dchart-setup.js"></script>
+    <script type="text/javascript">
+    var testData = [{id: 1, name: 'My Organization', parent: 0},{id: 2, name: 'CEO Office', parent: 1}];
+    $(function(){
+        org_chart = $('#orgChart').orgChart({
+            data: testData,
+            showControls: true,
+            allowEdit: true,
+            onAddNode: function(node){ 
+                log('Created new node on node '+node.data.id);
+                org_chart.newNode(node.data.id); 
+            },
+            onDeleteNode: function(node){
+                log('Deleted node '+node.data.id);
+                org_chart.deleteNode(node.data.id); 
+            },
+            onClickNode: function(node){
+                log('Clicked node '+node.data.id);
+            }
+
+        });
+    });
+
+    // just for example purpose
+    function log(text){
+        $('#consoleOutput').append('<p>'+text+'</p>')
+    }
+    </script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+</script>
+</body>
+</html>
